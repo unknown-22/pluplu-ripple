@@ -5,13 +5,13 @@ import tempfile
 import os
 
 
-def jitter_line(img_rgba, amplitude, sigma, frames, fps, seed, bg_color="#FFFFFF"):
+def jitter_line(img_rgba, amplitude_percent, sigma, frames, fps, seed, bg_color="#FFFFFF"):
     """
     Line Boil Effectを適用してアニメーションGIFを生成する
     
     Args:
         img_rgba: PIL Image (RGBA形式)
-        amplitude: 変位の振幅 (px)
+        amplitude_percent: 変位の振幅（画像幅に対する%）
         sigma: ガウシアンブラーのσ値
         frames: フレーム数
         fps: フレームレート
@@ -31,6 +31,10 @@ def jitter_line(img_rgba, amplitude, sigma, frames, fps, seed, bg_color="#FFFFFF
         img_array = np.concatenate([img_array, alpha], axis=2)
     
     h, w = img_array.shape[:2]
+    
+    # 割合からピクセル値に変換
+    amplitude = w * amplitude_percent / 100.0
+    
     base_x, base_y = np.meshgrid(np.arange(w), np.arange(h))
     
     # 乱数生成器の初期化
@@ -89,7 +93,7 @@ def jitter_line(img_rgba, amplitude, sigma, frames, fps, seed, bg_color="#FFFFFF
     return output_path
 
 
-def process_image(image, seed, amplitude, sigma, frames, fps, bg_color):
+def process_image(image, seed, amplitude_percent, sigma, frames, fps, bg_color):
     """
     Gradio用の画像処理ラッパー関数
     """
@@ -109,7 +113,7 @@ def process_image(image, seed, amplitude, sigma, frames, fps, bg_color):
     # Line Boil Effectを適用
     result_path = jitter_line(
         pil_image, 
-        amplitude, 
+        amplitude_percent, 
         sigma, 
         frames, 
         fps, 

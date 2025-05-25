@@ -40,12 +40,12 @@ def create_interface():
                     )
                     
                     amplitude = gr.Slider(
-                        label="↔ Amplitude (px)",
+                        label="↔ Amplitude (%)",
                         minimum=0,
-                        maximum=50,
-                        value=1.5,
+                        maximum=10,
+                        value=3,
                         step=0.1,
-                        info="最大変位量"
+                        info="最大変位量（画像幅に対する割合）"
                     )
                     
                     sigma = gr.Slider(
@@ -117,7 +117,7 @@ def create_interface():
                 1. **画像をアップロード**: PNG、JPEG対応（透過PNG推奨）
                 2. **パラメータ調整**: 
                    - **Seed**: 0で毎回異なる揺れ、固定値で再現可能
-                   - **Amplitude**: 揺れの強さ（1.5px程度が自然）
+                   - **Amplitude**: 揺れの強さ（画像幅に対する%、3%程度が自然）
                    - **Smooth σ**: 揺れの滑らかさ（5-10が推奨）
                    - **Frames**: フレーム数（8-16が軽量）
                    - **FPS**: 再生速度（16fpsが自然）
