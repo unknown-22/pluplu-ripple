@@ -16,16 +16,13 @@ def create_interface():
         )
         
         with gr.Row():
-            # 左側：入力画像
+            # 左側：入力画像・パラメータ調整
             with gr.Column(scale=1):
                 input_image = gr.Image(
                     label="📥 画像入力",
                     type="pil",
                     height=400
                 )
-            
-            # 右側：パラメータと出力
-            with gr.Column(scale=1):
                 # パラメータ調整
                 with gr.Group():
                     gr.Markdown("### 🎛️ パラメータ調整")
@@ -70,7 +67,7 @@ def create_interface():
                         label="🎞️ FPS",
                         minimum=6,
                         maximum=30,
-                        value=16,
+                        value=12,
                         step=1,
                         info="再生速度"
                     )
@@ -80,20 +77,21 @@ def create_interface():
                         value="#FFFFFF",
                         info="透過PNG用合成色"
                     )
-                
+
+            # 右側：出力
+            with gr.Column(scale=1):
+                # 出力結果
+                output_image = gr.Image(
+                    label="📱 アニメーションプレビュー",
+                    height=400
+                )
                 # プレビューボタン
                 preview_btn = gr.Button(
                     "👁️‍🗨️ プレビュー生成", 
                     variant="primary",
                     size="lg"
                 )
-                
-                # 出力結果
-                output_image = gr.Image(
-                    label="📱 アニメーションプレビュー",
-                    height=400
-                )
-        
+
         # イベントハンドラー
         preview_btn.click(
             fn=process_image,
