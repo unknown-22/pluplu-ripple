@@ -12,6 +12,14 @@ PluPlu Rippleは、既存の線画やイラストに**Line Boil Effect**（線�
 
 手描きアニメーションでよく見られる「線の生き生きとした揺れ」を、既存の静止画に簡単に追加できます。
 
+## 📸 プレビュー
+
+### アプリ画面
+![App Preview](images/app_preview.png)
+
+### 出力サンプル
+![Output Sample](images/output_sample.gif)
+
 ## ✨ 特徴
 
 - 🎨 **簡単操作**: ドラッグ&ドロップで画像をアップロード
